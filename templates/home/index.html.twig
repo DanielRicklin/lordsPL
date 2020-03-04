@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salut sexy poney !{% endblock %}
+
+{% block body %}
+    {# <div class="navigation mt-3">
+        {{ knp_pagination_render(pagination) }}
+    </div> #}
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-10 align-self-center">
+                {{ form_row(form.field, {'attr': {'autofocus': 'true', 'placeholder': 'Nom du compte ou presque'}, 'label': 'Recherche'}) }}
+            </div>
+            <div class="col-md-2 align-self-center">
+                <button class="btn btn-lg btn-primary" type="submit">Rechercher !</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+    <div class="row">
+        {% if pagination | length > 0 %}
+            {% for account in pagination %}
+                <div class="col-lg-4 mt-3">
+                    <div class="bg-primary account rounded p-3 text-white">
+                        <h3>[{{account.guild.tag}}]{{ account.name }}</h3>
+                        <p>Guilde : {{ account.guild.name }}</p>
+                        <p>Puissance : {{ account.might|number_format(0, ',', ',') }}</p>
+                        <div class="overlay rounded">
+                            <a class="btn btn-lg btn-success" href="{{path('account_show', {'id': account.id})}}">Voir !</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>Il n'existe pas de compte 😥😥</h2>
+        {% endif %}
+    </div>
+    <div class="navigation mt-3">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

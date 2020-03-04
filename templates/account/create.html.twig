@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{# {% form_theme formArticle 'bootstrap_4_layout.html.twig' %} #}
+
+{% block body %}
+    {% if editMode %}
+        <h1>Modification du compte</h1>
+    {% else %}
+        <h1>Création du compte</h1>
+    {% endif %}
+
+    {{ form_start(formAccount) }}
+
+    {{ form_row(formAccount.name, {'attr': {'placeholder': 'PL Ricky'}, 'label': 'Nom du compte'}) }}
+    {{ form_row(formAccount.might, {'label': 'Puissance'}) }}
+    {{ form_row(formAccount.guild, {'label': 'Guilde'}) }}
+
+    {% if editMode %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for img in images %}
+                    <tr>
+                        <td><img src="{{ img.link }}" alt=""></td>
+                        <td>
+                            <a href="{{ path("account_image_delete", {"id": img.id}) }}" class="btn btn-danger btn-sm rounded"> 
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {{ form_row(formAccount.images, {'label': 'Rapport/Screen'}) }}
+
+    {# <div class="row">
+        <div class="col-md-1">
+            <img id="artImg" src={{formAccount.vars.value.image ? formAccount.vars.value.image : ''}} class="img-responsive img-rounded" style="max-height: 75px; max-width: 75px;"/>
+        </div>
+        <div class="col-md 11">
+            {{ form_row(formAccount.image, {'attr': {'placeholder': formAccount.vars.value.image ? formAccount.vars.value.image : '', 'onchange': 'document.getElementById("artImg").src = window.URL.createObjectURL(this.files[0])'}, 'label': 'Image'}) }}
+        </div>
+    </div> #}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Ajouter le compte
+        {% endif %}
+    </button>
+
+    {{ form_end(formAccount) }}
+{% endblock %}

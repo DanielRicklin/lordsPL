@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <a href="{{path('account_modify', {'id':account.id})}}" class="btn btn-info mb-2">Modifier le compte</a>
+    <a href="{{path('guild_modify', {'id':account.guild.id})}}" class="btn btn-info mb-2">Modifier la guilde</a>
+    <div class="bg-primary rounded p-3 text-white">
+        <h3>[{{account.guild.tag}}]{{ account.name }}</h3>
+        <p>Guilde : {{ account.guild.name }}</p>
+        <p>Puissance : {{ account.might|number_format(0, ',', ',') }}</p>
+    </div>
+    {% for img in account.images %}
+        <img src="{{img.link}}" alt="{{account.name}}_{{img.id}}" class="img-fluid">
+    {% endfor %}
+{% endblock %}

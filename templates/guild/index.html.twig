@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{# {% form_theme formArticle 'bootstrap_4_layout.html.twig' %} #}
+
+{% block body %}
+    {% if editMode %}
+        <h1>Modification de la guilde</h1>
+    {% else %}
+        <h1>Création de la guilde</h1>
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.name, {'attr': {'placeholder': 'Ponies of love'}, 'label': 'Nom de la guilde'}) }}
+    {{ form_row(form.tag, {'label': 'Tag de la guilde'}) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Ajouter la guilde
+        {% endif %}
+    </button>
+
+    {{ form_end(form) }}
+{% endblock %}
